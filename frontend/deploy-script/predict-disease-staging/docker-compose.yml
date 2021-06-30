@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  predict-disease-frontend:
+    container_name: predict-disease-frontend
+    build:
+      context: ../../
+      dockerfile: ./deploy-script/predict-disease-staging/docker/Dockerfile
+    image: predict-disease-frontend:latest
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      NODE_ENV: production
+      API_URL: http://predict-disease-backend:1337
+    expose:
+      - 3000
+
+  predict-disease-frontend-nginx:
+    container_name: predict-disease-frontend-nginx
+    image: nginx:stable-alpine
+    restart: always
+
+    networks:
+      - webproxy-staging
+      - default
+    environment:
+      VIRTUAL_HOST: predictdisease.gq
+      LETSENCRYPT_HOST: predictdisease.gq
+      LETSENCRYPT_EMAIL: patipanpakchanakorn@gmail.com
+    volumes:
+      - ./config/nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
+      - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
+    expose:
+      - 80
+
+networks:
+  default:
+    external:
+      name: predict-disease-frontend-staging
+  webproxy-staging:
+    external:
+      name: webproxy-staging
