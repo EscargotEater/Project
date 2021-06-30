@@ -57,6 +57,11 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
         legend: {
           position: 'top',
           labels: {

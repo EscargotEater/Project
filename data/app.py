@@ -32,12 +32,10 @@ def predict():
     df = pd.DataFrame([data])
     change = 0
     if(target == 'db'):
-        # app.logger.info('With data : [%s]' %data)
         result = db.predict(df)[-1]
         app.logger.info(result)
         return str(result)
     elif(target == 'hd'):
-        # app.logger.info('With data : [%s]' %data)
         result = hd.predict(df)[-1]
         return str(result)
     return jsonify({"status": 100, "message": "Input params is diabete or heart."})
