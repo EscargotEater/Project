@@ -5,6 +5,7 @@
 
     <p class="desc">กรุณากรอกข้อมูลเพื่อทำการลงทะเบียน</p>
 
+    <b-alert v-if="error" show variant="danger">{{ error }}</b-alert>
     <p class="fieldname">อีเมล</p>
     <b-input-group class="mb-2" size="lg">
       <b-input-group-prepend is-text>
@@ -161,6 +162,7 @@ export default {
         firstName: '',
         lastName: '',
       },
+      error: '',
     }
   },
   validations: {
@@ -207,7 +209,17 @@ export default {
           })
           this.$toast.success('ลงทะเบียนสำเร็จ')
         } catch (e) {
-          console.log('Exception: ', e.response)
+          if (e.response?.data?.message[0]?.messages[0]?.message) {
+            const errorMessage =
+              'ลงทะเบียนไม่สำเร็จ : ' +
+              e.response?.data?.message[0]?.messages[0]?.message
+            console.error(errorMessage)
+            this.error = errorMessage
+          } else {
+            const errorMessage = 'เข้าสู่ระบบไม่สำเร็จ : ' + e
+            console.error(errorMessage)
+            this.error = errorMessage
+          }
         }
       }
     },

@@ -16,6 +16,11 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
         legend: {
           position: 'top',
           labels: {
@@ -88,6 +93,11 @@ export default {
       this.options = {
         responsive: true,
         maintainAspectRatio: false,
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
         legend: {
           position: 'top',
           labels: {
@@ -100,7 +110,19 @@ export default {
             {
               type: 'time',
               time: {
-                unit: 'month',
+                unit: 'day',
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                callback(value) {
+                  if (value % 1 === 0) {
+                    return value
+                  }
+                },
               },
             },
           ],
