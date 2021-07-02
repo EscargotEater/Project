@@ -321,6 +321,14 @@
             </b-card-text>
           </b-card>
         </b-card-group>
+
+        <p class="q" style="padding-top: 30px">
+          ที่มา：
+          <b-link
+            href="https://www.paolohospital.com//th-TH/chokchai4/Article/Details/โรคหัวใจ/เรื่อง--โรคหัวใจ--ทำไมต้องรู้"
+            >โรงพยาบาลเปาโล</b-link
+          >
+        </p>
       </b-col>
     </b-row>
   </b-container>

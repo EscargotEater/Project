@@ -93,6 +93,12 @@
           และผลไม้เพื่อเพิ่มกากใยอาหาร ออกกำลังกายเป็นประจำ งดสูบบุหรี่
           และงดดื่มสุรา
         </p>
+        <p class="q" style="padding-top: 30px">
+          ที่มา：
+          <b-link href="https://www.phukethospital.com/th/news-events/diabetes"
+            >โรงพยาบาลกรุงเทพภูเก็ต</b-link
+          >
+        </p>
       </b-col>
     </b-row>
   </b-container>
