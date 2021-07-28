@@ -1,7 +1,24 @@
 <template>
   <b-container class="my-5">
-    <p class="b">ประเมินความเสี่ยงการเป็นโรคหัวใจ</p>
+    <p class="b">ตรวจโรคหัวใจ</p>
     <hr class="mt-3 mb-5" />
+    <b-alert
+      show
+      dismissible
+      variant="danger"
+      style="
+          font-family: 'K2D', sans-serif;
+          font-size: 22px;
+          padding-top: 20px;
+          mx-auto;
+        "
+      ><h4 class="alert-heading">คุณมีค่า"คอเลสเตอรอล"สูงกว่าเกณฑ์!</h4>
+
+      <p>
+        คำแนะนำ: ลดอาหารที่มีไขมันนอิ่มตัว เช่น เนื้อสัตว์ติดมัน งดแอลกอฮอล์
+        ออกกำลังกายเป็นประจำ
+      </p>
+    </b-alert>
     <b-card
       border-variant="primary"
       header="โปรดกรอกข้อมูลผลตรวจสุขภาพประจำปี"
@@ -86,7 +103,7 @@
         <b-col cols="12"><hr class="my-2" /></b-col>
 
         <b-col sm="5">
-          <b-card-text> คลอเรสเตอรอลทั้งหมด </b-card-text>
+          <b-card-text> คอเรสเตอรอลทั้งหมด </b-card-text>
         </b-col>
         <b-col sm="2">
           <b-form-input
@@ -100,7 +117,7 @@
 
         <b-col cols="12"><hr class="my-2" /></b-col>
 
-        <b-col sm="5"> คลอเรสเตอรอลHDL </b-col>
+        <b-col sm="5"> คอเรสเตอรอลHDL </b-col>
         <b-col sm="2">
           <b-form-input
             id="hdl"
@@ -184,8 +201,9 @@ export default {
         dbfam: this.value.dbfam,
       })
       res.data === 0
-        ? (this.message = 'ไม่มีความเสี่ยงจะเป็นโรคหัวใจ')
-        : (this.alert = 'มีความเสี่ยงจะเป็นโรคหัวใจ')
+        ? (this.message = 'ยินดีด้วย ตรวจไม่พบโรคหัวใจ')
+        : (this.alert =
+            'ตรวจพบโรคเบาหวาน ควรไปพบแพทย์เพื่อทำการตรวจโดยละเอียดอีกครั้ง')
       await this.$axios.post('activities', {
         activity: 'predictcad',
       })

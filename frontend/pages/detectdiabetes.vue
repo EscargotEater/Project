@@ -1,7 +1,33 @@
 <template>
   <b-container class="my-5">
-    <p class="b">ประเมินความเสี่ยงการเป็นโรคเบาหวาน</p>
+    <p class="b">ตรวจโรคเบาหวาน</p>
     <hr class="mt-3 mb-5" />
+    <b-alert
+      show
+      dismissible
+      variant="danger"
+      style="
+          font-family: 'K2D', sans-serif;
+          font-size: 22px;
+          padding-top: 20px;
+          mx-auto;
+        "
+      ><h4 class="alert-heading">คุณมีค่า"ระดับน้ำตาล"สูงกว่าเกณฑ์!</h4>
+
+      <p>
+        คำแนะนำ: กินอาหารที่ถูกต้อง ลดอาหารประเภทคาร์โบไฮเดรต
+        หรือดื่มน้ำให้เพียงพอในแต่ละวัน ออกกำลังกายเป็นประจำ
+        ทำให้น้ำตาลถูกนำออกมาใช้
+      </p>
+      <hr />
+      <h4 class="alert-heading">
+        คุณมีค่า"ความดันสูงสุดขณะหัวใจบีบตัว"สูงกว่าเกณฑ์!
+      </h4>
+      <p>
+        คำแนะนำ: ควบคุมอาหาร หลีกเลี่ยงอาหารทอด รับประทานอาหารที่ไม่เค็มจัด และ
+        งด หรือ ลดการดื่มแอลกอฮอล์
+      </p>
+    </b-alert>
     <b-card
       border-variant="primary"
       header="โปรดกรอกข้อมูลผลตรวจสุขภาพประจำปี"
@@ -20,6 +46,7 @@
     >
       <b-alert v-if="message" show variant="success">{{ message }}</b-alert>
       <b-alert v-if="alert" show variant="danger">{{ alert }}</b-alert>
+
       <b-row class="mb-3" align-v="center" align-h="end">
         <b-col sm="5">อายุ</b-col>
         <b-col sm="2">
@@ -101,7 +128,7 @@
         <b-col cols="12"><hr class="my-2" /></b-col>
 
         <b-col sm="5">
-          <b-card-text> คลอเรสเตอรอลทั้งหมด </b-card-text>
+          <b-card-text> คอเรสเตอรอลทั้งหมด </b-card-text>
         </b-col>
         <b-col sm="2">
           <b-form-input
@@ -115,7 +142,7 @@
 
         <b-col cols="12"><hr class="my-2" /></b-col>
 
-        <b-col sm="5"> คลอเรสเตอรอลHDL </b-col>
+        <b-col sm="5"> คอเรสเตอรอลHDL </b-col>
         <b-col sm="2">
           <b-form-input
             id="hdl"
@@ -201,8 +228,9 @@ export default {
         dbfam: parseInt(this.value.dbfam),
       })
       res.data === 0
-        ? (this.message = 'ไม่มีความเสี่ยงจะเป็นโรคเบาหวาน')
-        : (this.alert = 'มีความเสี่ยงจะเป็นโรคเบาหวาน')
+        ? (this.message = 'ยินดีด้วย ตรวจไม่พบโรคเบาหวาน')
+        : (this.alert =
+            'ตรวจพบโรคเบาหวาน ควรไปพบแพทย์เพื่อทำการตรวจโดยละเอียดอีกครั้ง')
       await this.$axios.post('activities', {
         activity: 'predictdb',
       })
